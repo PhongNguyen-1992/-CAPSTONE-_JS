@@ -1,11 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Quản lý kho hàng</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
 </head>
-<body>
-    
+
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+
+        <header class="mb-8">
+            <h1 class="text-4xl font-extrabold text-blue-700 mb-2">Danh Sách Kho Hàng</h1>            
+        </header>
+        <!-- Phan tab menu -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" href="#DanhSachSP" role="tab" data-toggle="tab">Kho Hàng</a>
+            </li>
+
+        </ul>
+
+        <br />
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <!--Danh sách sản phẩm -->
+            <div role="tabpanel" class="tab-pane  in active" id="DanhSachSP">
+                <div class="row mb-2">
+                    <div class="col-md-8">
+                        <!-- BEGIN BUTTOM THÊM MỚI -->
+                        <button id="btnThemSP"
+                            class="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition"
+                            data-toggle="modal" data-target="#myModal">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                <path d="M12 4v16m8-8H4" />
+                            </svg>
+                            Thêm Mới
+                        </button>
+                        <button id="btnXuatExcel" onclick="onExportExcel()"
+                            class="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                <path d="M12 4v16m8-8H4" />
+                            </svg>
+                            Xuất Excel
+                        </button>
+                    </div>
+
+                    <div class="w-full sm:w-1/3">
+                        <label for="txtTimKiem" class="sr-only">Tìm kiếm sản phẩm</label>
+                        <div class="relative">
+                            <input type="text" id="txtTimKiem" placeholder="Nhập tên sản phẩm để tìm kiếm..."
+                                class="block w-full rounded-lg border border-gray-300 py-2 pl-3 pr-10 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 focus:outline-none focus:ring-1" />
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15a7.5 7.5 0 0 1 0 15z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="overflow-x-auto bg-white rounded-lg shadow border border-gray-200">
+                    <table class="min-w-full divide-y divide-gray-200 text-sm">
+                        <thead class="bg-gray-100 ">
+                            <tr>
+                                <th class="px-3 py-2 text-left font-medium text-gray-700">STT</th>
+                                <th class="px-3 py-2 text-left font-medium text-gray-700">Name</th>
+                                <th class="px-3 py-2 text-left font-medium text-gray-700">Price</th>
+                                <th class="px-3 py-2 text-left font-medium text-gray-700">Screen</th>
+                                <th class="px-3 py-2 text-left font-medium text-gray-700">BlackCamera</th>
+                                <th class="px-3 py-2 text-left font-medium text-gray-700">FrontCamera</th>
+                                <th class="px-3 py-2 text-left font-medium text-gray-700 ">Image</th>
+                                <th class="px-3 py-2 text-left font-medium text-gray-700">Description</th>
+                                <th class="px-3 py-2 text-left font-medium text-gray-700">Type</th>                              
+                            </tr>
+                        </thead>
+                        <tbody id="tblDanhSachSP" class="divide-y divide-gray-100 text-center">
+                            <tr>
+                                <td colspan="12" class="px-3 py-2 text-gray-500">Đang tải dữ liệu...</td>
+                                <!-- Dữ liệu bảng sẽ được render ở đây -->
+                        </tbody>
+                    </table>
+                </div>
+                <!--KetThuc Tabmenu-->
+
+                <!-- The Modal -->
+                <div class="modal fade" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header flex justify-center items-center font-bold text-center text-3xl"
+                                id="modalHeader">
+                                <h4 class="modal-title">Modal Heading</h4>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    &times;
+                                </button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="p-6 bg-white rounded-xl shadow-md">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div id="idNhanVienContainer" class="hidden">
+                                        <input type="text" id="idSP" class="hidden" />
+                                        <label class="block mb-1 text-sm font-medium text-gray-700">ID Product</label>
+                                    </div>
+                                    <div>
+                                        <label class="block mb-1 text-sm font-medium text-gray-700">Name Product</label>
+                                        <input id="NameSP" placeholder="Nhập vào tên sản phẩm..."
+                                            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300" />
+                                    </div>
+                                    <div>
+                                        <label class="block mb-1 text-sm font-medium text-gray-700">Price</label>
+                                        <input id="PriceSP" placeholder="Nhập vào giá bán..."
+                                            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300" />
+                                    </div>
+                                    <div>
+                                        <label class="block mb-1 text-sm font-medium text-gray-700">Screen</label>
+                                        <input id="Screen" placeholder="Nhập vào Screen..."
+                                            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300" />
+                                    </div>
+                                    <div>
+                                        <label class="block mb-1 text-sm font-medium text-gray-700">FortCamera</label>
+                                        <input id="FortCamera" placeholder="Nhập vào FortCamera..."
+                                            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300" />
+                                    </div>
+                                    <div>
+                                        <label class="block mb-1 text-sm font-medium text-gray-700">Image</label>
+                                        <input type="file" id="ImageSP" accept="image/*"
+                                            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300" />
+                                    </div>
+
+                                    <div>
+                                        <label class="block mb-1 text-sm font-medium text-gray-700">Description</label>
+                                        <input id="Desc" placeholder="Nhập vào Description"
+                                            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300" />
+                                    </div>
+
+                                    <div>
+                                        <label class="block mb-1 text-sm font-medium text-gray-700">Type</label>
+                                        <select name="Type" id="Type"
+                                            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300">
+                                            <option value="iphone">Iphone</option>
+                                            <option value="samsung">Samsung</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>                        
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                        </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="container"></div>
+        <style>
+            #container {
+                min-width: 310px;
+                max-width: 800px;
+                height: 400px;
+                margin: 0 auto;
+            }
+        </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.9.0/axios.min.js"
+            integrity="sha512-FPlUpimug7gt7Hn7swE8N2pHw/+oQMq/+R/hH/2hZ43VOQ+Kjh25rQzuLyPz7aUWKlRpI7wXbY6+U3oFPGjPOA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script type="module" src="../js/mainad.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.9.0/axios.min.js"
+            integrity="sha512-FPlUpimug7gt7Hn7swE8N2pHw/+oQMq/+R/hH/2hZ43VOQ+Kjh25rQzuLyPz7aUWKlRpI7wXbY6+U3oFPGjPOA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/series-label.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 </body>
+
 </html>

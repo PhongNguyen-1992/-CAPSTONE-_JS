@@ -1,11 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
+    <title>Cửa Hàng Điện Thoại</title>
+   <link rel="stylesheet" href="../../assetUser/style.css">
 </head>
 <body>
-    
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">📱 TechStore</div>
+        <button class="cart-btn" onclick="toggleCart()">
+            🛒 Giỏ hàng
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
+    </nav>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h3>Giỏ hàng của bạn</h3>
+                <button class="cart-close" onclick="toggleCart()">×</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <div class="empty-cart">Giỏ hàng trống</div>
+            </div>
+            <div class="cart-total" id="cartTotal">
+                Tổng: 0đ
+            </div>
+            <div class="cart-actions">
+                <button class="cart-btn-secondary" onclick="continueShopping()">
+                    🛍️ Tiếp tục mua sắm
+                </button>
+                <button class="cart-btn-primary" id="checkoutBtn" onclick="checkout()" disabled>
+                    💳 Thanh toán
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Carousel -->
+        <div class="carousel-container">
+            <div class="carousel" id="carousel">
+                <div class="carousel-slide">
+                    <img src="https://cdn.tgdd.vn/Products/Images/42/114115/iphone-x-64gb-hh-600x600.jpg" alt="iPhone X">
+                    <div class="carousel-text">
+                        <h2>iPhone Mới Nhất</h2>
+                        <p>Khám phá công nghệ tiên tiến</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://cdn.tgdd.vn/Products/Images/42/230529/iphone-14-pro-max-tim-thumb-600x600.jpg" alt="iPhone 14">
+                    <div class="carousel-text">
+                        <h2>Ưu Đại Đặc Biệt</h2>
+                        <p>Giảm giá lên đến 30%</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://cdn.tgdd.vn/Products/Images/42/251192/iphone-15-pro-max-blue-thumbnew-600x600.jpg" alt="iPhone 15">
+                    <div class="carousel-text">
+                        <h2>Trải Nghiệm Tuyệt Vời</h2>
+                        <p>Chất lượng hàng đầu</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-nav" id="carouselNav"></div>
+        </div>
+
+        <!-- Products Section -->
+        <div class="products-section">
+            <h2 class="section-title">Sản Phẩm Nổi Bật</h2>
+            <div class="products-grid" id="productsGrid">
+                <div class="loading">Đang tải sản phẩm...</div>
+            </div>
+        </div>
+    </div>
+<script src="../js/main.js"></script>
+   
 </body>
 </html>
