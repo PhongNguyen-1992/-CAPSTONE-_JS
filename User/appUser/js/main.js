@@ -7,7 +7,7 @@ let currentSlide = 0;
 // Initialize
 document.addEventListener('DOMContentLoaded', function () {
     loadProducts();
-    initCarousel();    
+    initCarousel();       
 });
 
 // API
@@ -68,7 +68,7 @@ function addToCart(productId) {
     }
 
     updateCartDisplay();
-
+    
     // Show success animation
     const button = event.target;
     const originalText = button.textContent;
@@ -84,6 +84,8 @@ function addToCart(productId) {
 function removeFromCart(productId) {
     cart = cart.filter(item => item.id !== productId);
     updateCartDisplay();
+    
+
 }
 
 function updateQuantity(productId, change) {
@@ -96,6 +98,8 @@ function updateQuantity(productId, change) {
         removeFromCart(productId);
     } else {
         updateCartDisplay();
+        
+
     }
 }
 
@@ -192,6 +196,7 @@ function checkout() {
             // Clear cart after successful checkout
             cart = [];
             updateCartDisplay();
+            
             toggleCart();
 
             checkoutBtn.textContent = originalText;
@@ -199,6 +204,9 @@ function checkout() {
     }
    
 }
+
+
+
 
 // Carousel Functions
 function initCarousel() {

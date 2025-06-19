@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,10 +13,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.32/sweetalert2.all.min.js"></script>
     <!-- Axios -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"></script>
-    
+    <!-- Tailwind -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
     <link rel="stylesheet" href="../../assetAdmin/CSS/Style.css">
-    
+
 </head>
+
 <body>
     <div class="container-fluid">
         <!-- Header -->
@@ -45,29 +49,37 @@
         <div class="main-content">
             <!-- Controls -->
             <div class="row mb-4">
-                <div class="col-md-6">
-                    <button class="btn btn-add btn-custom" id="btnThemSP" data-bs-toggle="modal" data-bs-target="#productModal">
+                <!-- Cột trái: Nút Thêm + Sắp xếp -->
+                <div class="col-md-6 d-flex gap-2">
+                    <button class="btn btn-add btn-custom" id="btnThemSP" data-bs-toggle="modal"
+                        data-bs-target="#productModal">
                         <i class="fas fa-plus me-2"></i>Thêm Sản Phẩm
                     </button>
+                    <button id="btnSapSep" class="btn btn-outline-primary">
+                        🔤 Sắp xếp A → Z
+                    </button>
                 </div>
+
+                <!-- Cột phải: ô tìm kiếm -->
                 <div class="col-md-6">
-                    <div class="search-box">
+                    <div class="search-box position-relative">
                         <input type="text" class="form-control" id="txtTimKiem" placeholder="Tìm kiếm sản phẩm...">
-                        <i class="fas fa-search"></i>
+                        <i class="fas fa-search position-absolute top-50 end-0 translate-middle-y me-3 text-muted"></i>
                     </div>
                 </div>
             </div>
 
             <!-- Products Table -->
             <div class="table-container">
-                <table class="table table-hover">
+                <table class="table table-hover ">
                     <thead>
-                        <tr>
+                        <tr class="">
                             <th>STT</th>
                             <th>Tên sản phẩm</th>
                             <th>Giá</th>
                             <th>Màn hình</th>
                             <th>Camera trước</th>
+                            <th>Camera sau</th>
                             <th>Hình ảnh</th>
                             <th>Mô tả</th>
                             <th>Loại</th>
@@ -76,7 +88,7 @@
                     </thead>
                     <tbody id="tblDanhSachSP">
                         <tr>
-                            <td colspan="9" class="loading">
+                            <td colspan="12" class="loading">
                                 <i class="fas fa-spinner fa-spin me-2"></i>
                                 Đang tải dữ liệu...
                             </td>
@@ -159,8 +171,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-success" id="btnAdd" style="display: none;">Thêm sản phẩm</button>
-                    <button type="button" class="btn btn-warning" id="btnUpdate" style="display: none;">Cập nhật</button>
+                    <button type="button" class="btn btn-success" id="btnAdd" style="display: none;">Thêm sản
+                        phẩm</button>
+                    <button type="button" class="btn btn-warning" id="btnUpdate" style="display: none;">Cập
+                        nhật</button>
                 </div>
             </div>
         </div>
@@ -171,4 +185,5 @@
 
     <script type="module" src="../js/main.js"></script>
 </body>
+
 </html>

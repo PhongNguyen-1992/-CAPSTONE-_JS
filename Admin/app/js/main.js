@@ -69,8 +69,9 @@ const renderProduct = (data) => {
                             <td class="price-cell">${formatPrice(pr.price)}</td>
                             <td>${pr.screen}</td>
                             <td>${pr.frontCamera}</td>
+                            <td>${pr.backCamera}</td>
                             <td>
-                                <img src="${pr.img}" class="product-img" alt="${pr.name}>
+                                <img src="${pr.img}" class="product-img" alt="${pr.name}>"
                             </td>
                             <td>${truncateText(pr.desc, 50)}</td>
                             <td><span class="type-badge ${typeClass}">${pr.type.toUpperCase()}</span></td>
@@ -279,6 +280,26 @@ const onSearch = () => {
         renderProduct(filteredProducts);
     }
 };
+// Sort Name
+let sortAsc = true;
+
+getEls("btnSapSep").addEventListener("click", () => {
+    sortProductsByName();
+    getEls("btnSapSep").innerHTML = sortAsc
+  ? '🔤 Sắp xếp A → Z'
+  : '🔡 Sắp xếp Z → A';
+});
+
+const sortProductsByName = () => {
+    const sorted = [...allProducts].sort((a, b) => {
+        return sortAsc
+            ? a.name.localeCompare(b.name, 'vi', { sensitivity: 'base' })
+            : b.name.localeCompare(a.name, 'vi', { sensitivity: 'base' });
+    });
+
+    sortAsc = !sortAsc; // Đảo chiều
+    renderProduct(sorted);
+};
 
 // Utility Functions
 const resetForm = () => {
@@ -304,7 +325,7 @@ const getTypeClass = (type) => {
         default: return 'type-other';
     }
 };
-
+// Hiện tổng total sản phẩm
 const updateStats = () => {
     getEls("totalProducts").textContent = allProducts.length;
 };
