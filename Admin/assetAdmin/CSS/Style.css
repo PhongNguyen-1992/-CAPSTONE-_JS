@@ -1,0 +1,194 @@
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container-fluid {
+            padding: 2rem;
+        }
+
+        .admin-header {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-title {
+            color: #667eea;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-custom {
+            border-radius: 8px;
+            padding: 0.6rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-add {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            border: none;
+            color: white;
+        }
+
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+        }
+
+        .table-container {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .table {
+            margin: 0;
+        }
+
+        .table thead {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .table thead th {
+            border: none;
+            font-weight: 600;
+            padding: 1rem 0.8rem;
+        }
+
+        .table tbody td {
+            padding: 1rem 0.8rem;
+            vertical-align: middle;
+            border-color: #f8f9fa;
+        }
+
+        .product-img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-action {
+            margin: 0 0.2rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px 15px 0 0;
+            border: none;
+        }
+
+        .modal-title {
+            font-weight: 600;
+        }
+
+        .btn-close {
+            filter: brightness(0) invert(1);
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 0.8rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #6c757d;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-box input {
+            padding-left: 3rem;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stats-number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .price-cell {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        .type-badge {
+            padding: 0.25rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .type-iphone {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .type-samsung {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .type-other {
+            background: #fff3e0;
+            color: #f57c00;
+        }

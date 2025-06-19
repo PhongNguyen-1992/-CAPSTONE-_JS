@@ -261,17 +261,17 @@ body {
     object-fit: cover;
 }
 
-.carousel-slide::after {
+/* .carousel-slide::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(45deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
-}
+    background: linear-gradient(45deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+} */
 
-.carousel-text {
+/* .carousel-text {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -279,7 +279,7 @@ body {
     color: white;
     text-align: center;
     z-index: 1;
-}
+} */
 
 .carousel-text h2 {
     font-size: 2.5rem;

@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initCarousel();
 });
 
-// API Functions
+// API
 async function loadProducts() {
     try {
         const response = await fetch('https://684981f845f4c0f5ee71c0a8.mockapi.io/khoHang');
@@ -167,7 +167,7 @@ function checkout() {
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
-    // Create order summary
+    // Alert Thông Báo Thanh Toán
     const orderSummary = cart.map(item =>
         `${item.name} x${item.quantity} - ${formatPrice(item.price * item.quantity)}`
     ).join('\n');
@@ -237,7 +237,7 @@ function updateCarousel() {
     });
 }
 
-// Utility Functions
+// format giá tiền
 function formatPrice(price) {
     return new Intl.NumberFormat('vi-VN', {
         style: 'currency',

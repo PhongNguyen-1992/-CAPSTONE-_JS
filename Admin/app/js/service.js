@@ -1,41 +1,44 @@
 class ProductService {
     getListProduct() {
-        const promise = axios({            
+        const promise = axios({
             url: "https://684981f845f4c0f5ee71c0a8.mockapi.io/khoHang",
             method: "GET",
         });
-        return promise
+        return promise;
     }
 
-// Delete Product
     deleteProductAPI(id) {
         const promise = axios({
             url: `https://684981f845f4c0f5ee71c0a8.mockapi.io/khoHang/${id}`,
             method: "DELETE",
         });
-        return promise
+        return promise;
     }
 
-    //Edit Product giá trị
     editProductAPI(id, product) {
         const promise = axios({
             url: `https://684981f845f4c0f5ee71c0a8.mockapi.io/khoHang/${id}`,
             method: "PUT",
             data: product,
         });
-        return promise
+        return promise;
     }
 
-    // Thêm Product mới
     addProductAPI(product) {
         const promise = axios({
             url: "https://684981f845f4c0f5ee71c0a8.mockapi.io/khoHang",
             method: "POST",
             data: product,
         });
-        return promise
+        return promise;
     }
 
-
+    getProductByIdAPI(id) {
+        const promise = axios({
+            url: `https://684981f845f4c0f5ee71c0a8.mockapi.io/khoHang/${id}`,
+            method: "GET",
+        });
+        return promise;
+    }
 }
 export default ProductService
