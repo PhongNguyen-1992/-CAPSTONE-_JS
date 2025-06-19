@@ -7,7 +7,7 @@ let currentSlide = 0;
 // Initialize
 document.addEventListener('DOMContentLoaded', function () {
     loadProducts();
-    initCarousel();
+    initCarousel();    
 });
 
 // API
@@ -43,7 +43,7 @@ function renderProducts() {
                             <div><strong>Camera trước:</strong> ${product.frontCamera}</div>
                         </div>
                         <div class="product-price">${formatPrice(product.price)}</div>
-                        <button class="add-to-cart-btn" onclick="addToCart('${product.id}')">
+                        <button class="add-to-cart-btn"  onclick="addToCart('${product.id}')">
                             🛒 Thêm vào giỏ hàng
                         </button>
                     </div>
@@ -197,6 +197,7 @@ function checkout() {
             checkoutBtn.textContent = originalText;
         }, 2000);
     }
+   
 }
 
 // Carousel Functions

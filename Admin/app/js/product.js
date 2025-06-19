@@ -1,4 +1,3 @@
-
 class Product {
   constructor(id, name, price, screen, backCamera, frontCamera, img, desc, type) {
     this.id = id;

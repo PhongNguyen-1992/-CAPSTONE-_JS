@@ -70,8 +70,7 @@ const renderProduct = (data) => {
                             <td>${pr.screen}</td>
                             <td>${pr.frontCamera}</td>
                             <td>
-                                <img src="${pr.img}" class="product-img" alt="${pr.name}" 
-                                     onerror="this.src='https://via.placeholder.com/50x50?text=No+Image'">
+                                <img src="${pr.img}" class="product-img" alt="${pr.name}>
                             </td>
                             <td>${truncateText(pr.desc, 50)}</td>
                             <td><span class="type-badge ${typeClass}">${pr.type.toUpperCase()}</span></td>
@@ -120,11 +119,17 @@ const getValue = () => {
 const validateForm = () => {
     const requiredFields = ['NameSP', 'PriceSP', 'Screen', 'BackCamera', 'FrontCamera', 'ImageSP', 'Desc', 'Type'];
 
-    for (let field of requiredFields) {
-        const element = getEls(field);
-        if (!element.value.trim()) {
-            element.focus();
-            Swal.fire('Lỗi!', `Vui lòng nhập ${element.previousElementSibling.textContent}`, 'error');
+    for (const id of requiredFields) {
+        const el = getEls(id);
+        const label = el.previousElementSibling?.textContent?.trim() || 'trường này';
+
+        if (!el.value.trim()) {
+            el.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi!',
+                text: `Vui lòng nhập ${label}`,
+            });
             return false;
         }
     }
@@ -132,12 +137,17 @@ const validateForm = () => {
     const price = parseFloat(getEls("PriceSP").value);
     if (isNaN(price) || price <= 0) {
         getEls("PriceSP").focus();
-        Swal.fire('Lỗi!', 'Giá sản phẩm phải là số dương', 'error');
+        Swal.fire({
+            icon: 'error',
+            title: 'Lỗi!',
+            text: 'Giá sản phẩm phải là số dương',
+        });
         return false;
     }
 
     return true;
 };
+
 
 // Add Product
 const onAddProduct = () => {
