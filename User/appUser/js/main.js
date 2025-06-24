@@ -1,13 +1,19 @@
-
-// Cart state (using memory instead of localStorage for Claude.ai compatibility)
-let cart = [];
+// Cart state với localStorage
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let products = [];
 let currentSlide = 0;
+
+// Hàm lưu cart vào localStorage
+function saveCartToStorage() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
 
 // Initialize
 document.addEventListener('DOMContentLoaded', function () {
     loadProducts();
-    initCarousel();       
+    initCarousel();
+    // Cập nhật hiển thị cart khi trang load
+    updateCartDisplay();
 });
 
 // API
@@ -67,6 +73,8 @@ function addToCart(productId) {
         });
     }
 
+    // Lưu vào localStorage
+    saveCartToStorage();
     updateCartDisplay();
     
     // Show success animation
@@ -83,9 +91,10 @@ function addToCart(productId) {
 
 function removeFromCart(productId) {
     cart = cart.filter(item => item.id !== productId);
-    updateCartDisplay();
     
-
+    // Lưu vào localStorage
+    saveCartToStorage();
+    updateCartDisplay();
 }
 
 function updateQuantity(productId, change) {
@@ -97,9 +106,9 @@ function updateQuantity(productId, change) {
     if (item.quantity <= 0) {
         removeFromCart(productId);
     } else {
+        // Lưu vào localStorage
+        saveCartToStorage();
         updateCartDisplay();
-        
-
     }
 }
 
@@ -195,6 +204,8 @@ function checkout() {
 
             // Clear cart after successful checkout
             cart = [];
+            // Xóa cart khỏi localStorage
+            localStorage.removeItem('cart');
             updateCartDisplay();
             
             toggleCart();
@@ -202,11 +213,7 @@ function checkout() {
             checkoutBtn.textContent = originalText;
         }, 2000);
     }
-   
 }
-
-
-
 
 // Carousel Functions
 function initCarousel() {
@@ -246,10 +253,37 @@ function updateCarousel() {
     });
 }
 
-// format giá tiền
+// Format giá tiền
 function formatPrice(price) {
     return new Intl.NumberFormat('vi-VN', {
         style: 'currency',
         currency: 'VND'
     }).format(price);
 }
+
+// Đồng bộ cart giữa các tab (tùy chọn)
+window.addEventListener('storage', function(e) {
+    if (e.key === 'cart') {
+        cart = JSON.parse(e.newValue) || [];
+        updateCartDisplay();
+    }
+});
+
+// Thêm tính năng Clear Cart (tùy chọn)
+function clearCart() {
+    if (confirm('Bạn có chắc muốn xóa toàn bộ giỏ hàng?')) {
+        cart = [];
+        localStorage.removeItem('cart');
+        updateCartDisplay();
+    }
+}
+
+// Backup tự động (tùy chọn)
+setInterval(() => {
+    if (cart.length > 0) {
+        localStorage.setItem('cart_backup', JSON.stringify({
+            cart: cart,
+            timestamp: Date.now()
+        }));
+    }
+}, 30000); // Backup mỗi 30 giây
